@@ -13,7 +13,9 @@ function preload() {
     //pass the first and the last file name and it will try to find the ones in between
     snake = loadAnimation('assets/snake_1.png', 'assets/snake_2.png', 'assets/snake_3.png');
     snake.looping = false;
-    moon = loadAnimation('assets/moon_1.png', 'assets/moon_2.png', 'assets/moon_3.png', 'assets/moon_4.png', 'assets/moon_5.png', 'assets/moon_4.png', 'assets/moon_3.png', 'assets/moon_2.png', 'assets/moon_1.png');
+    moon = loadAnimation('assets/moon_1.png', 'assets/moon_5.png');
+    moon.looping = false;
+
 
 
 }
@@ -28,10 +30,8 @@ function draw() {
 
     //specify the animation instance and its x,y position
     //animation() will update the animation frame as well
-    if (mouseIsPressed)
-        moon.play();
-    else
-        moon.stop();
+    if (moon.getFrame() == moon.getLastFrame())
+        moon.changeFrame(5);
 
     if (mouseIsPressed)
         snake.goToFrame(0);
@@ -42,5 +42,12 @@ function draw() {
 
     animation(moon, 400, 450);
     animation(snake, 300, 150);
+
+}
+
+function mousePressed() {
+    //rewind on mouse pressed - change frame to 0
+    moon.rewind();
+
 
 }
